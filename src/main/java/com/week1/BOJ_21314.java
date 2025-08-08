@@ -2,7 +2,7 @@ package com.week1;
 
 import java.util.*;
 
-public class BOJ21314 {
+public class BOJ_21314 {
 
     public static void main(String[] args) {
 
