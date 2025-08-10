@@ -11,8 +11,8 @@ public class BOJ_2615 {// 첫 번째 돌이 가장 왼쪽에 위치하도록
     static int[] dy = {1, 1, 1, 0};
 
     static int ROW = 19, COL = 19;
-    static int BLACK = 1, WHITE = 2;
     static int[][] board = new int[ROW+1][COL+1];
+
 
     public static void main(String[] args) throws IOException {
 
