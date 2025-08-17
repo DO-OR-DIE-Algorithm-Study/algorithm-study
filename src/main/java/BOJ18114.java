@@ -30,30 +30,69 @@ public class BOJ18114 {
         Arrays.sort(w);
 
         boolean isExist = false;
-        int start = 0;
-        int end = n;
-        int mid = (start + end) / 2;
 
-        while(start != mid && mid != end){
-            if(w[start] == c || w[mid] == c || w[end] == c){
-                isExist = true;
-                break;
-            }
-
-            if(w[start] + w[mid] == c || w[mid] + w[end] == c){
-                isExist = true;
-                break;
-            }
-
-            if(w[start] + w[mid] + w[end] == c){
-                isExist = true;
-                break;
-            }
-
-            int frontMid = (start + mid) / 2;
-            int backMid = (mid + end) / 2;
-
-            if(w[frontMid] < c)
+        // case 1 : 하나로 가능할 때
+        if(Arrays.binarySearch(w, c) >= 0){
+            isExist = true;
         }
+
+
+        // case 2 : 두개로 가능할 때
+        int s = 0, e = n - 1;
+
+        while(!isExist && s < e){
+
+            long v = (long) w[s] + w[e];
+
+            if(v == c){
+                isExist = true;
+                break;
+            }
+
+            if(v > c){
+                e--;
+            }else{
+                s++;
+            }
+        }
+
+        // case 3 : 세개로 가능할 때
+        int i = 0;
+        while(!isExist && i < n){
+
+            if(w[i] >= c) break;
+
+            int target = c - w[i];
+            s = i + 1;
+            e = n - 1;
+
+            while(s < e){
+
+                long v = (long) w[s] + w[e];
+
+                if(v == target){
+                    isExist = true;
+                    break;
+                }
+
+                if(v > c){
+                    e--;
+                }else{
+                    s++;
+                }
+            }
+
+
+            i++;
+        }
+
+        if(isExist){
+            bw.append("1");
+        }else{
+            bw.append("0");
+        }
+        bw.flush();
+        bw.close();
+        br.close();
     }
 }
