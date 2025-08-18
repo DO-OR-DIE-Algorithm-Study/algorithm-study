@@ -21,9 +21,6 @@ public class BOJ1106 {
             cities[i][0] = Integer.parseInt(split[0]);
             cities[i][1] = Integer.parseInt(split[1]);
         }
-        Arrays.sort(cities, Comparator.comparingInt(x -> x[0]));
-
-        Arrays.sort(cities, Comparator.comparingDouble(x -> (double) x[0] / x[1]));
 
         for(int i = 1; i < c + 100; i++){
             for(int[] city : cities){
