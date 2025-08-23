@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.PriorityQueue;
 import java.util.StringTokenizer;
 
@@ -13,12 +14,12 @@ public class BOJ18513 {
         int n = Integer.parseInt(st.nextToken());
         int k = Integer.parseInt(st.nextToken());
 
-        int[] s = new int[n];
-        boolean[] visit = new boolean[200000001];
+        long[] s = new long[n];
+        HashSet<Long> visited = new HashSet<>();
         st = new StringTokenizer(br.readLine());
         for(int i = 0; i < n; i++){
-            s[i] = Integer.parseInt(st.nextToken());
-            visit[s[i] + 100000000] = true;
+            s[i] = Long.parseLong(st.nextToken());
+            visited.add(s[i]);
         }
 
         /**
@@ -28,27 +29,27 @@ public class BOJ18513 {
          */
 
 
-        PriorityQueue<int[]> pq = new PriorityQueue<>(Comparator.comparing(x -> x[0]));
+        PriorityQueue<long[]> pq = new PriorityQueue<>(Comparator.comparing(x -> x[0]));
         long answer = 0;
 
-        for (int i : s) {
-            pq.add(new int[]{1, i, -1});
-            pq.add(new int[]{1, i, 1});
+        for (long i : s) {
+            pq.add(new long[]{1, i, -1});
+            pq.add(new long[]{1, i, 1});
         }
 
         while (k > 0 && !pq.isEmpty()){
-            int[] cur = pq.poll();
-            int distance = cur[0];
-            int coordinate = cur[1];
-            int direction = cur[2];
+            long[] cur = pq.poll();
+            long distance = cur[0];
+            long coordinate = cur[1];
+            long direction = cur[2];
 
-            int _coordinate = coordinate + direction;
+            long _coordinate = coordinate + direction;
 
-            if(_coordinate <= 100000000 && _coordinate >= -100000000 && !visit[_coordinate + 100000000]){
-                visit[_coordinate + 100000000] = true;
+            if(!visited.contains(_coordinate)){
+                visited.add(_coordinate);
                 k--;
                 answer += distance;
-                pq.add(new int[]{distance + 1, _coordinate, direction});
+                pq.add(new long[]{distance + 1, _coordinate, direction});
             }
         }
 
