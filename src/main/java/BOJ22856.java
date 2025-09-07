@@ -20,6 +20,14 @@ public class BOJ22856 {
          * 이런식으로 구현하되, 종단 노드에서 break하면 될듯
          */
 
+        /**
+         * 수정된 아이디어
+         * 완전한 중위순회시, 모든 화살표의 개수는 2(n - 1)개임
+         * 근데 종단 노드에 갔다가 다시 안오니까
+         * 종단 노드의 깊이만큼 빼주면 됨
+         * 즉 2(n - 1) - (종단노드의 depth)가 정답
+         */
+
         int n = Integer.parseInt(br.readLine());
         tree = new HashMap<>();
         Set<Integer> allNodes = new HashSet<>();
