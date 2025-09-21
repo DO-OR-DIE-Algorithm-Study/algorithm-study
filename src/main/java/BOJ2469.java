@@ -48,8 +48,8 @@ public class BOJ2469 {
             }
         }
 
-//        System.out.println(initialState);
-//        System.out.println(finalState);
+        System.out.println(initialState);
+        System.out.println(finalState);
         StringBuilder answer = new StringBuilder();
         for(int i = 0; i < k - 1; i++){
             if(initialState.charAt(i) != finalState.charAt(i)){

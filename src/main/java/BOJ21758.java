@@ -10,6 +10,8 @@ public class BOJ21758 {
         /**
          * 하나의 꿀벌과 꿀통은 서로 양극단에 위치하고
          * 남은 하나의 꿀벌의 위치를 옮겨가면서 최대값을 구하는데, 누적합을 활용
+         *
+         * 벌통이 가운데 위치할 수 있는 경우도 있음...
          */
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -26,7 +28,22 @@ public class BOJ21758 {
             reversed[i] = s[s.length - i - 1];
         }
         max = Math.max(max, calculateMax(reversed));
+        max = Math.max(max, calculateMax2(s));
         System.out.println(max);
+    }
+
+    private static int calculateMax2(int[] s) {
+        int[] ps = new int[s.length];
+        ps[0] = s[0];
+        for(int i = 1; i < ps.length; i++){
+            ps[i] = ps[i - 1] + s[i];
+        }
+        int max = 0;
+        for(int i = 1; i < s.length - 1; i++){
+            max = Math.max(max, (ps[i] - ps[0]) + (ps[ps.length - 2] - ps[i - 1]));
+        }
+
+        return max;
     }
 
     private static int calculateMax(int[] s) {
@@ -45,6 +62,4 @@ public class BOJ21758 {
 
         return max;
     }
-
-
 }
